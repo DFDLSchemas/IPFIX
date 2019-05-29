@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/">
+    
+    <xs:include schemaLocation="org/apache/daffodil/xsd/DFDLGeneralFormat.dfdl.xsd"/>
+    <xs:annotation>
+       <xs:appinfo source="http://www.ogf.org/dfdl/">
+          <dfdl:defineFormat name="ipfix">
+          <dfdl:format 
+            ref="GeneralFormatPortable"
+            alignmentUnits="bits" 
+            lengthUnits="bits" 
+            representation="binary" 
+            binaryNumberRep="binary" 
+            byteOrder="bigEndian" 
+            lengthKind="implicit" 
+            alignment="1" 
+            encodingErrorPolicy="error" 
+            binaryFloatRep="ieee" 
+            binaryNumberCheckPolicy="lax" 
+            calendarPatternKind="implicit" 
+            documentFinalTerminatorCanBeMissing="yes" 
+            emptyValueDelimiterPolicy="none" 
+            escapeSchemeRef="" 
+            fillByte="f" 
+            floating="no" 
+            ignoreCase="no" 
+            initiatedContent="no" 
+            initiator="" 
+            leadingSkip="0" 
+            separator="" 
+            separatorSuppressionPolicy="anyEmpty" 
+            textStandardZeroRep="0" 
+            textStandardInfinityRep="Inf" 
+            textStandardExponentRep="E" 
+            textStandardNaNRep="NaN" 
+            textNumberPattern="#,##0.###;-#,##0.###" 
+            textNumberRounding="explicit" 
+            textNumberRoundingMode="roundUnnecessary" 
+            textNumberRoundingIncrement="0" 
+            textStandardGroupingSeparator="," 
+            separatorPosition="infix" 
+            sequenceKind="ordered" 
+            terminator="" 
+            textBidi="no" 
+            textNumberCheckPolicy="strict" 
+            textNumberRep="standard" 
+            textStandardBase="10" 
+            textTrimKind="none" 
+            textPadKind="none"
+            trailingSkip="0" 
+            truncateSpecifiedLengthString="no" 
+            utf16Width="fixed" 
+            encoding="US-ASCII" 
+            nilKind="literalValue" 
+            nilValueDelimiterPolicy="none" 
+            occursCountKind="parsed"/>
+          </dfdl:defineFormat>
+          
+          <dfdl:format ref="ipfix"/>
+      </xs:appinfo>
+    </xs:annotation>
+
+  <xs:simpleType name="Padding-format">
+    <xs:annotation>
+      <xs:appinfo source="http://www.ogf.org/dfdl/">
+        <dfdl:assert test="{ dfdl:checkConstraints(.) }" 
+          message="Validation of Padding Format failed" />
+      </xs:appinfo>
+    </xs:annotation>
+    <xs:restriction base="int8">
+      <xs:enumeration value="0" />
+    </xs:restriction>
+  </xs:simpleType>
+    
+  <xs:complexType name="Field-specifier-format">
+        <xs:sequence>
+            <xs:element name="Enterprise-bit"                 type="unsignedint1" />
+            <xs:element name="Information-element-identifier" type="int15" />
+            <xs:element name="Field-length"                   type="int16" />
+            <xs:element name="Enterprise-number"              type="int32" minOccurs="0" dfdl:occursCountKind="expression" dfdl:occursCount="{ ../Enterprise-bit }"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+    <!-- ************************************************************ -->
+    <!-- ************************************************************ -->
+    
+    <xs:simpleType name="unsignedint1" dfdl:length="1"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:unsignedInt" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="int8" dfdl:length="8"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:int" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="unsignedint8" dfdl:length="8"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:unsignedInt" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="int15" dfdl:length="15"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:int" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="int16" dfdl:length="16"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:int" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="unsignedint16" dfdl:length="16"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:unsignedInt" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="int32" dfdl:length="32"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:int" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="unsignedint32" dfdl:length="32"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:unsignedInt" />
+    </xs:simpleType>
+    
+    <xs:simpleType name="unsignedint64" dfdl:length="64"  dfdl:lengthKind="explicit">
+        <xs:restriction base="xs:unsignedInt" />
+    </xs:simpleType>
+    
+</xs:schema>

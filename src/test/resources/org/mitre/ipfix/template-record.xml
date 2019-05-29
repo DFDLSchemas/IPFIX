@@ -1,5 +1,4 @@
-<IPFIX 
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+<IPFIX>
   <Message-header>
     <Version-number>10</Version-number>
     <Length>72</Length>

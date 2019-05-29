@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema 
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/">
+
+    <xs:include schemaLocation="common.dfdl.xsd"/>
+    <xs:annotation>
+       <xs:appinfo source="http://www.ogf.org/dfdl/">
+          <dfdl:format ref="ipfix"/>
+      </xs:appinfo>
+    </xs:annotation>
+
+    <!-- IPFIX -->
+
+    <xs:element name="IPFIX">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Message-header" type="Message-header-format"/>
+                <xs:element name="Set" type="Set-format" maxOccurs="unbounded" dfdl:occursCountKind="implicit"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+
+    <xs:complexType name="Message-header-format">
+        <xs:sequence>
+            <xs:element name="Version-number" type="int16"/>
+            <xs:element name="Length" type="int16"/>
+            <xs:element name="Export-time" type="int32"/>
+            <xs:element name="Sequence-number" type="int32"/>
+            <xs:element name="Observation-domain-id" type="int32"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Set-format">
+        <xs:sequence>
+            <xs:element name="Template-Set" type="Template-Set-format"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Template-Set-format">
+        <xs:sequence>
+            <xs:element name="Template-Set-header" type="Template-Set-header-format"/>
+            <xs:element name="Template-Records" dfdl:lengthKind="explicit" dfdl:length="{ ../Template-Set-header/Length - 4 }" dfdl:lengthUnits="bytes">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="Template-record" type="Template-record-format" minOccurs="1" maxOccurs="unbounded" dfdl:occursCountKind="implicit"/>
+                        <xs:element name="Padding" type="Padding-format" minOccurs="0" maxOccurs="unbounded" dfdl:occursCountKind="implicit"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Template-Set-header-format">
+        <xs:sequence>
+            <xs:element name="Set-id" type="int16"/>
+            <xs:sequence>
+                <xs:annotation>
+                    <xs:appinfo source="http://www.ogf.org/dfdl/">
+                        <dfdl:discriminator test="{ ./Set-id eq 2 }" message="Template-Set/Set-id is not 2"/>
+                    </xs:appinfo>
+                </xs:annotation>
+            </xs:sequence>
+            <xs:element name="Length" type="int16"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Template-record-format">
+        <xs:sequence>
+            <xs:element name="Template-record-header" type="Template-record-header-format"/>
+            <xs:element name="Field-specifier" type="Field-specifier-format" minOccurs="1" maxOccurs="unbounded" dfdl:occursCountKind="expression"
+                dfdl:occursCount="{ ../Template-record-header/Field-count }"/>
+        </xs:sequence>
+    </xs:complexType>
+
+    <xs:complexType name="Template-record-header-format">
+        <xs:sequence>
+            <xs:element name="Template-id" type="int16"/>
+            <xs:element name="Field-count" type="int16"/>
+        </xs:sequence>
+    </xs:complexType>
+    
+</xs:schema>

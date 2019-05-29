@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<tdml:testSuite suiteName="ipfix" description="IPFIX Tests"
+  xmlns:tdml="http://www.ibm.com/xmlns/dfdl/testData" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/" 
+  xmlns:daf="urn:ogf:dfdl:2013:imp:daffodil.apache.org:2018:ext"
+  xmlns:xs="http://www.w3.org/2001/XMLSchema" 
+  defaultRoundTrip="onePass"
+  defaultConfig="cfg">
+
+  <tdml:defineConfig name="cfg">
+    <daf:tunables>
+      <daf:suppressSchemaDefinitionWarnings>
+        unsupportedAttributeFormDefault
+        encodingErrorPolicyError
+        emptyElementParsePolicyError
+      </daf:suppressSchemaDefinitionWarnings>
+    </daf:tunables>
+  </tdml:defineConfig>
+
+  <!-- 
+       If you want to test this schema under IBM DFDL you have to 
+       make it work with this config first since 'treatAsMissing' 
+       is the behavior IBM DFDL implements, not treatAsEmpty which is
+       the daffodil standard.
+    -->
+  <tdml:defineConfig name="cfg_noEmptyElements">
+    <daf:tunables>
+      <daf:defaultEmptyElementParsePolicy>treatAsMissing</daf:defaultEmptyElementParsePolicy>
+      <daf:suppressSchemaDefinitionWarnings>
+        unsupportedAttributeFormDefault
+        encodingErrorPolicyError
+      </daf:suppressSchemaDefinitionWarnings>
+    </daf:tunables>
+  </tdml:defineConfig>
+
+  
+  <tdml:parserTestCase name="ipfix1" root="IPFIX"
+    model="org/mitre/ipfix/template-record.dfdl.xsd">
+    <tdml:document>
+      <tdml:documentPart type="file">org/mitre/ipfix/template-record.binary</tdml:documentPart>
+    </tdml:document>
+    <tdml:infoset>
+      <tdml:dfdlInfoset type="file">org/mitre/ipfix/template-record.xml</tdml:dfdlInfoset>
+    </tdml:infoset>
+  </tdml:parserTestCase>
+  
+  <!-- make round trip once DAFFODIL-2139 is fixed 
+       https://issues.apache.org/jira/browse/DAFFODIL-2139
+   -->
+  <tdml:parserTestCase name="ipfix2" root="IPFIX"
+    model="org/mitre/ipfix/data-record.dfdl.xsd"
+    roundTrip="none">
+    <tdml:document>
+      <tdml:documentPart type="file">org/mitre/ipfix/data-record.binary</tdml:documentPart>
+    </tdml:document>
+    <tdml:infoset>
+      <tdml:dfdlInfoset type="file">org/mitre/ipfix/data-record.xml</tdml:dfdlInfoset>
+    </tdml:infoset>
+  </tdml:parserTestCase>
+
+</tdml:testSuite>
