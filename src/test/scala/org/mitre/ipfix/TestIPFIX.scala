@@ -18,4 +18,5 @@ class TestIPFIX {
 
   @Test def test_ipfix1(): Unit = { r.runOneTest("ipfix1") }
   @Test def test_ipfix2(): Unit = { r.runOneTest("ipfix2") }
+  @Test def test_ipfix2u(): Unit = { r.runOneTest("ipfix2u") }
 }
