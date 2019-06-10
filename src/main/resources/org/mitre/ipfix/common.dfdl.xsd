@@ -62,17 +62,24 @@
       </xs:appinfo>
     </xs:annotation>
 
-  <xs:simpleType name="Padding-format">
-    <xs:annotation>
-      <xs:appinfo source="http://www.ogf.org/dfdl/">
-        <dfdl:assert test="{ dfdl:checkConstraints(.) }" 
-          message="Validation of Padding Format failed" />
-      </xs:appinfo>
-    </xs:annotation>
-    <xs:restriction base="int8">
-      <xs:enumeration value="0" />
-    </xs:restriction>
-  </xs:simpleType>
+  <xs:complexType name="Padding-format">
+    <xs:sequence>
+      <xs:element name="Padding">
+        <xs:simpleType>
+          <xs:restriction base="int8">
+            <xs:enumeration value="0" />
+          </xs:restriction>
+        </xs:simpleType>
+      </xs:element>
+      <xs:sequence>
+        <xs:annotation>
+          <xs:appinfo source="http://www.ogf.org/dfdl/">
+            <dfdl:assert test="{ ./Padding eq 0 }" message="Validation of Padding Format failed" />
+          </xs:appinfo>
+        </xs:annotation>
+      </xs:sequence>
+    </xs:sequence>
+  </xs:complexType>
     
   <xs:complexType name="Field-specifier-format">
         <xs:sequence>
@@ -119,7 +126,7 @@
     </xs:simpleType>
     
     <xs:simpleType name="unsignedint64" dfdl:length="64"  dfdl:lengthKind="explicit">
-        <xs:restriction base="xs:unsignedInt" />
+        <xs:restriction base="xs:unsignedLong" />
     </xs:simpleType>
     
 </xs:schema>

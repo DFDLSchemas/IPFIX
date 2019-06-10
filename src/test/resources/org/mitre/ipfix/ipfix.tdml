@@ -50,7 +50,7 @@
    -->
   <tdml:parserTestCase name="ipfix2" root="IPFIX"
     model="org/mitre/ipfix/data-record.dfdl.xsd"
-    roundTrip="onePass">
+    roundTrip="twoPass">
     <tdml:document>
       <tdml:documentPart type="file">org/mitre/ipfix/data-record.binary</tdml:documentPart>
     </tdml:document>
@@ -58,17 +58,5 @@
       <tdml:dfdlInfoset type="file">org/mitre/ipfix/data-record.xml</tdml:dfdlInfoset>
     </tdml:infoset>
   </tdml:parserTestCase>
-
-
-  <tdml:unparserTestCase name="ipfix2u" root="IPFIX"
-    model="org/mitre/ipfix/data-record.dfdl.xsd"
-    roundTrip="onePass">
-    <tdml:document>
-      <tdml:documentPart type="file">org/mitre/ipfix/data-record.binary</tdml:documentPart>
-    </tdml:document>
-    <tdml:infoset>
-      <tdml:dfdlInfoset type="file">org/mitre/ipfix/data-record.xml</tdml:dfdlInfoset>
-    </tdml:infoset>
-  </tdml:unparserTestCase>
 
 </tdml:testSuite>

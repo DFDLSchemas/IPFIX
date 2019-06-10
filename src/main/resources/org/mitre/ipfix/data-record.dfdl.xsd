@@ -44,7 +44,7 @@
                 <xs:complexType>
                     <xs:sequence>
                         <xs:element name="Data-record" type="Data-record-format" minOccurs="1" maxOccurs="unbounded" dfdl:occursCountKind="implicit" />
-                        <xs:element name="Padding"     type="Padding-format"     minOccurs="0" maxOccurs="unbounded" dfdl:occursCountKind="implicit" />
+                        <xs:element name="Padding" type="Padding-format" minOccurs="0" maxOccurs="unbounded" dfdl:occursCountKind="implicit" />
                     </xs:sequence>
                 </xs:complexType>
             </xs:element>
