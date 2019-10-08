@@ -1,4 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
+   <!--
+        NOTICE
+        
+        This software was produced for the U. S. Government under
+        Basic Contract No. W15P7T-13-C-A802, and is subject to the
+        Rights in Noncommercial Computer Software and Noncommercial
+        Computer Software Documentation Clause 252.227-7014 (FEB 2012)
+        
+        Copyright 2019 The MITRE Corporation.
+        
+        Approved for Public Release; Distribution Unlimited. Public Release Case Number 19-1822
+    -->
 <xs:schema 
   xmlns:xs="http://www.w3.org/2001/XMLSchema" 
   xmlns:dfdl="http://www.ogf.org/dfdl/dfdl-1.0/">

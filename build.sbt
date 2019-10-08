@@ -9,12 +9,7 @@ lazy val root = (project in file(".")).
     )),
     name := "ipfix",
     libraryDependencies := Seq(
-      // 
-      // Note: for Daffodil 2.2.0, this module is named daffodil-tdml.
-      // For Daffodil 2.3.0+ (and latest.integration snapshots thereof) it is named
-      // daffodil-tdml-processor.
-      //
-      "org.apache.daffodil" %% "daffodil-tdml-processor" % "latest.integration" % "test",
+      "org.apache.daffodil" %% "daffodil-tdml-processor" % "2.4.0" % "test",
       "junit" % "junit" % "4.12" % "test",
       "com.novocode" % "junit-interface" % "0.11" % "test"
     ))  
@@ -22,9 +17,5 @@ lazy val root = (project in file(".")).
   // Uncomment this line below to run against IBM DFDL.
   // You need to have IBM DFDL installed and the IBM DFDL Cross Tester
   //
-  // Note: This requires a 2.3.0 release of daffodil. 
-  // (See version of daffodil-tdml-processor above)
-  // or a development snapshot (e.g., version "latest.integration")
-  // 
-  //.settings(IBMDFDLCrossTesterPlugin.settings)
+  // .settings(IBMDFDLCrossTesterPlugin.settings)
 
