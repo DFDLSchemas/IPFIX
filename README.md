@@ -1,6 +1,8 @@
 IPFIX
 ======
 
+This is a DFDL schema for the IPFIX format. It is portable to both IBM DFDL and Daffodil implementations of DFDL.
+
 The folder contains the following documents:
 
 1. doc/Parsing-IPFIX-Messages-using-DFDL.pptx 
