@@ -8,8 +8,8 @@ object TestIPFIX {
 
   val r = Runner("org/mitre/ipfix/", "ipfix.tdml")
 
-  @AfterClass def shutDown {
-    r.reset
+  @AfterClass def shutDown = {
+    r.reset()
   }
 }
 
